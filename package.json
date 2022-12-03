@@ -1,0 +1,49 @@
+{
+  "name": "nuxt-plugin-electron",
+  "version": "0.1.0",
+  "description": "Electron plugin for Nuxt",
+  "main": "index.mjs",
+  "types": "types",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caoxiemeihao/nuxt-plugin-electron.git"
+  },
+  "author": "草鞋没号 <308487730@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run types && vite build",
+    "dev": "vite build --watch",
+    "types": "rm -rf types && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "esbuild": "*"
+  },
+  "dependencies": {
+    "notbundle": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "esbuild": "^0.15.16",
+    "nuxt": "^3.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4"
+  },
+  "files": [
+    "electron-env.d.ts",
+    "types",
+    "index.mjs",
+    "index.js"
+  ],
+  "keywords": [
+    "nuxt",
+    "plugin",
+    "electron"
+  ]
+}
