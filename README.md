@@ -5,7 +5,7 @@ Integrate Vite and Electron
 [![NPM version](https://img.shields.io/npm/v/nuxt-plugin-electron.svg)](https://npmjs.org/package/nuxt-plugin-electron)
 [![NPM Downloads](https://img.shields.io/npm/dm/nuxt-plugin-electron.svg)](https://npmjs.org/package/nuxt-plugin-electron)
 
-![screenshort.png](https://github.com/caoxiemeihao/nuxt-plugin-electron/tree/main/screenshort.png?raw=true)
+![screenshort.png](https://github.com/caoxiemeihao/nuxt-plugin-electron/blob/main/screenshort.png?raw=true)
 
 ## Install
 
