@@ -7,12 +7,22 @@ export interface ElectronConfig extends Configuration {
 }
 
 export function withElectron(config: ElectronConfig): (nuxtConfig: NuxtConfig) => NuxtConfig {
+  const production = process.env.NODE_ENV === 'production'
+
   config.output ??= 'dist-electron'
   config.watch ??= {}
   config.plugins ??= []
 
   return nuxtConfig => {
+    nuxtConfig.app ??= {}
     nuxtConfig.hooks ??= {}
+
+    if (production) {
+      // Ensure that is works with the `file://` protocol.
+      nuxtConfig.app.baseURL ??= './'
+    }
+
+    // ------------------------------------------------------------
 
     // For development
     const listen = nuxtConfig.hooks.listen
@@ -40,7 +50,7 @@ export function withElectron(config: ElectronConfig): (nuxtConfig: NuxtConfig) =
     nuxtConfig.hooks['build:done'] = () => {
       build_done?.()
 
-      if (process.env.NODE_ENV === 'production') {
+      if (production) {
         notbundle(config)
       }
     }
