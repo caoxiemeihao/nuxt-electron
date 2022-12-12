@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-plugin-electron",
-  "version": "0.1.1",
-  "description": "Electron plugin for Nuxt",
+  "name": "nuxt-electron",
+  "version": "0.2.0",
+  "description": "Nuxt Integration with Electron",
   "main": "index.mjs",
   "types": "types",
   "exports": {
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caoxiemeihao/nuxt-plugin-electron.git"
+    "url": "git+https://github.com/caoxiemeihao/nuxt-electron.git"
   },
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
     "build": "npm run types && vite build",
     "dev": "vite build --watch",
-    "types": "rm -rf types && tsc",
+    "types": "rm -rf types && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {

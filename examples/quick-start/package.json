@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-plugin-electron-quick-start",
+  "name": "nuxt-electron-quick-start",
   "version": "0.0.0",
   "private": true,
   "author": "草鞋没号 <308487730@qq.com>",
@@ -14,6 +14,6 @@
     "electron": "^21.3.0",
     "electron-builder": "^23.6.0",
     "nuxt": "^3.0.0",
-    "nuxt-plugin-electron": "workspace:*"
+    "nuxt-electron": "workspace:*"
   }
 }

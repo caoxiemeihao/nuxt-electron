@@ -1,8 +1,9 @@
-import { defineNuxtConfig } from 'nuxt/config'
-import { withElectron } from 'nuxt-plugin-electron'
+import type { ElectronOptions } from 'nuxt-electron'
 
-const nuxtConfig = defineNuxtConfig({})
-
-export default withElectron({
-  include: ['electron'],
-})(nuxtConfig)
+export default defineNuxtConfig({
+  modules: [
+    ['nuxt-electron', <ElectronOptions>{
+      include: ['electron'],
+    }],
+  ],
+})

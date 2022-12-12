@@ -24,12 +24,12 @@ importers:
       electron: ^21.3.0
       electron-builder: ^23.6.0
       nuxt: ^3.0.0
-      nuxt-plugin-electron: workspace:*
+      nuxt-electron: workspace:*
     devDependencies:
       electron: 21.3.3
       electron-builder: 23.6.0
       nuxt: 3.0.0
-      nuxt-plugin-electron: link:../..
+      nuxt-electron: link:../..
 
 packages:
 
@@ -1249,7 +1249,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.5
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.5
-      vite: 3.2.4
+      vite: 3.2.4_@types+node@18.11.10
       vue: 3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -1262,7 +1262,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.4
+      vite: 3.2.4_@types+node@18.11.10
       vue: 3.2.45
     dev: true
 

@@ -1,63 +1,51 @@
-import type { NuxtConfig } from 'nuxt/config'
-import notbundle, { type Configuration } from 'notbundle'
 import { type AddressInfo } from 'net'
+import { defineNuxtModule } from '@nuxt/kit'
+import notbundle, { type Configuration } from 'notbundle'
 
-export interface ElectronConfig extends Configuration {
+export interface ElectronOptions extends Configuration {
 
 }
 
-export function withElectron(config: ElectronConfig): (nuxtConfig: NuxtConfig) => NuxtConfig {
-  const production = process.env.NODE_ENV === 'production'
+export default defineNuxtModule<ElectronOptions>({
+  setup(options, nuxt) {
+    const production = process.env.NODE_ENV === 'production'
 
-  config.output ??= 'dist-electron'
-  config.watch ??= {}
-  config.plugins ??= []
-
-  return nuxtConfig => {
-    nuxtConfig.app ??= {}
-    nuxtConfig.hooks ??= {}
+    options.output ??= 'dist-electron'
+    options.watch ??= {}
+    options.plugins ??= []
 
     if (production) {
       // Ensure that is works with the `file://` protocol.
-      nuxtConfig.app.baseURL ??= './'
+      nuxt.options.app.baseURL ??= './'
     }
 
-    // ------------------------------------------------------------
+    nuxt.hooks.addHooks({
+      // For development
+      listen(server, listener) {
+        const addressInfo = server.address() as AddressInfo
+        Object.assign(process.env, {
+          // This is required, and it is used in Electron-Main.
+          VITE_DEV_SERVER_URL: `http://localhost:${addressInfo.port}`,
+        })
 
-    // For development
-    const listen = nuxtConfig.hooks.listen
-    nuxtConfig.hooks.listen = (server, listener) => {
-      listen?.(server, listener)
+        options.plugins!.push({
+          name: 'nuxt-electron:statup',
+          ondone() {
+            startup()
+          },
+        })
 
-      const addressInfo = server.address() as AddressInfo
-      Object.assign(process.env, {
-        // This is required, and it is used in Electron-Main.
-        VITE_DEV_SERVER_URL: `http://localhost:${addressInfo.port}`,
-      })
-
-      config.plugins!.push({
-        name: 'nuxt-plugin-electron:statup',
-        ondone() {
-          startup()
-        },
-      })
-
-      notbundle(config)
-    }
-
-    // For build
-    const build_done = nuxtConfig.hooks['build:done']
-    nuxtConfig.hooks['build:done'] = () => {
-      build_done?.()
-
-      if (production) {
-        notbundle(config)
+        notbundle(options)
+      },
+      // For build
+      'build:done'() {
+        if (production) {
+          notbundle(options)
+        }
       }
-    }
-
-    return nuxtConfig
+    })
   }
-}
+}) as any
 
 /**
  * Electron App startup function.  
