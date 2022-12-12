@@ -1,33 +1,34 @@
-# nuxt-plugin-electron
+# nuxt-electron
 
 Integrate Vite and Electron
 
-[![NPM version](https://img.shields.io/npm/v/nuxt-plugin-electron.svg)](https://npmjs.org/package/nuxt-plugin-electron)
-[![NPM Downloads](https://img.shields.io/npm/dm/nuxt-plugin-electron.svg)](https://npmjs.org/package/nuxt-plugin-electron)
+[![NPM version](https://img.shields.io/npm/v/nuxt-electron.svg)](https://npmjs.org/package/nuxt-electron)
+[![NPM Downloads](https://img.shields.io/npm/dm/nuxt-electron.svg)](https://npmjs.org/package/nuxt-electron)
 
-![screenshort.png](https://github.com/caoxiemeihao/nuxt-plugin-electron/blob/main/screenshort.png?raw=true)
+![screenshort.png](https://github.com/caoxiemeihao/nuxt-electron/blob/main/screenshort.png?raw=true)
 
 ## Install
 
 ```sh
-npm i nuxt-plugin-electron -D
+npm i nuxt-electron -D
 ```
 
 ## Examples
 
-- [quick-start](https://github.com/caoxiemeihao/nuxt-plugin-electron/tree/main/examples/quick-start)
+- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
 
 ## Usage
 
 nuxt.config.ts
 
 ```js
-import { defineNuxtConfig } from 'nuxt/config'
-import { withElectron } from 'nuxt-plugin-electron'
+import type { ElectronOptions } from 'nuxt-electron'
 
-const nuxtConfig = defineNuxtConfig({})
-
-export default withElectron({
-  include: ['electron'],
-})(nuxtConfig)
+export default defineNuxtConfig({
+  modules: [
+    ['nuxt-electron', <ElectronOptions>{
+      include: ['electron'],
+    }],
+  ],
+})
 ```
