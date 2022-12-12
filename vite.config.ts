@@ -17,6 +17,7 @@ export default defineConfig({
         'electron',
         'esbuild',
         'vite',
+        '@nuxt/kit',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),
         ...Object.keys(pkg.dependencies),

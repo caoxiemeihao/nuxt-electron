@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run types && vite build",
     "dev": "vite build --watch",
-    "types": "rm -rf types && tsc",
+    "types": "rm -rf types && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
