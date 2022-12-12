@@ -7,11 +7,5 @@ declare namespace NodeJS {
 
   interface Process {
     electronApp: import('child_process').ChildProcess
-    _resolved_config: import('.').ResolvedConfig
   }
-}
-
-interface ImportMeta {
-  /** shims Vite */
-  env: Record<string, any>
 }
