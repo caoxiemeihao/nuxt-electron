@@ -2,21 +2,24 @@ import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
 import notbundle, { type Configuration } from 'notbundle'
 
-export interface ElectronOptions extends Configuration {
-
-}
+export interface ElectronOptions extends Configuration { }
 
 export default defineNuxtModule<ElectronOptions>({
   setup(options, nuxt) {
-    const production = process.env.NODE_ENV === 'production'
+    const isProduction = process.env.NODE_ENV === 'production'
 
     options.output ??= 'dist-electron'
     options.watch ??= {}
     options.plugins ??= []
 
-    if (production) {
-      // Ensure that is works with the `file://` protocol.
-      nuxt.options.app.baseURL ??= './'
+    // Force to SPA mode always since we don't need SSR for a desktop app.
+    nuxt.options.ssr = false
+
+    if (isProduction) {
+        // Fix path to make it works with Electron protocol `file://`
+        nuxt.options.app.baseURL = './'
+        nuxt.options.runtimeConfig.app.baseURL = './'
+        nuxt.options.router.options.hashMode = true // Avoid 404 errors
     }
 
     nuxt.hooks.addHooks({
@@ -29,7 +32,7 @@ export default defineNuxtModule<ElectronOptions>({
         })
 
         options.plugins!.push({
-          name: 'nuxt-electron:statup',
+          name: 'nuxt-electron:startup',
           ondone() {
             startup()
           },
@@ -39,9 +42,7 @@ export default defineNuxtModule<ElectronOptions>({
       },
       // For build
       'build:done'() {
-        if (production) {
-          notbundle(options)
-        }
+        if (isProduction) notbundle(options)
       }
     })
   }
@@ -54,9 +55,10 @@ export default defineNuxtModule<ElectronOptions>({
  */
 export async function startup(argv = ['.', '--no-sandbox']) {
   const { spawn } = await import('child_process')
-  // @ts-ignore
   const electron = await import('electron')
-  const electronPath = <any>(electron.default ?? electron)
+  const electronPath = (electron.default ?? electron)
+
+  if (!electron) throw new Error('Electron is required, please install it as devDependencies.')
 
   if (process.electronApp) {
     process.electronApp.removeAllListeners()
@@ -64,7 +66,7 @@ export async function startup(argv = ['.', '--no-sandbox']) {
   }
 
   // Start Electron.app
-  process.electronApp = spawn(electronPath, argv, { stdio: 'inherit' })
+  process.electronApp = spawn(`${electronPath}`, argv, { stdio: 'inherit' })
   // Exit command after Electron.app exits
   process.electronApp.once('exit', process.exit)
 }
