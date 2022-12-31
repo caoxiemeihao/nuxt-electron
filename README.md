@@ -10,7 +10,7 @@ Integrate Nuxt and Electron
 ## Install
 
 ```sh
-npm i nuxt-electron electron electron-builder -D
+npm i -D nuxt-electron vite-electron-plugin electron electron-builder
 ```
 
 ## Examples
@@ -33,6 +33,8 @@ export default defineNuxtConfig({
   ],
 })
 ```
+
+This is based on the `vite-electron-plugin` package, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed configuration information.
 
 ## Notes
 By default, we force the App to run in SPA mode since we don't need SSR for desktop apps.

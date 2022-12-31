@@ -1,6 +1,6 @@
 {
   "name": "nuxt-electron",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Nuxt Integration with Electron",
   "main": "index.mjs",
   "types": "types",
@@ -23,17 +23,16 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "esbuild": "*"
-  },
-  "dependencies": {
-    "notbundle": "^0.1.1"
+    "esbuild": "*",
+    "vite-electron-plugin": "*"
   },
   "devDependencies": {
-    "@types/node": "^18.7.18",
-    "esbuild": "^0.15.16",
+    "@types/node": "^18.11.18",
+    "esbuild": "^0.16.12",
     "nuxt": "^3.0.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3",
+    "vite-electron-plugin": "^0.7.1"
   },
   "files": [
     "electron-env.d.ts",
@@ -44,6 +43,7 @@
   "keywords": [
     "nuxt",
     "plugin",
+    "module",
     "electron"
   ]
 }
