@@ -1,3 +1,7 @@
+## 0.3.1 (2023-01-01)
+
+- 9c845f2 fix: correct `baseURL`
+
 ## 0.3.0 (2022-12-31)
 
 - 5d90902 refactor: `vite-electron-plugin` instead  `notbundle`
