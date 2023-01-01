@@ -14,13 +14,14 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        '@nuxt/kit',
         'electron',
         'esbuild',
         'vite',
-        '@nuxt/kit',
+        'vite-electron-plugin',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),
-        ...Object.keys(pkg.dependencies),
+        ...Object.keys(pkg.dependencies ?? {}),
       ],
       output: {
         exports: 'named',

@@ -1,3 +1,9 @@
+## 0.3.0 (2022-12-31)
+
+- 5d90902 refactor: `vite-electron-plugin` instead  `notbundle`
+- b4822c8 Merge pull request #5 from gurvancampion/main
+- 1a4fddb fix: build path & 404 error in production
+
 ## 0.2.0 (2022-12-12)
 
 #### Break!
