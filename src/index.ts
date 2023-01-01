@@ -23,7 +23,13 @@ export default defineNuxtModule<ElectronOptions>({
     if (isProduction) {
       // Fix path to make it works with Electron protocol `file://`
       nuxt.options.app.baseURL ??= './'
+      if (nuxt.options.app.baseURL.startsWith('/')) {
+        nuxt.options.app.baseURL = '.' + nuxt.options.app.baseURL
+      }
       nuxt.options.runtimeConfig.app.baseURL ??= './'
+      if (nuxt.options.runtimeConfig.app.baseURL.startsWith('/')) {
+        nuxt.options.runtimeConfig.app.baseURL = '.' + nuxt.options.runtimeConfig.app.baseURL
+      }
       nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
     }
 
