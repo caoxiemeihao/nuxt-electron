@@ -34,7 +34,26 @@ export default defineNuxtConfig({
 })
 ```
 
-This is based on the `vite-electron-plugin` package, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed configuration information.
+**This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options.**
+
+## Recommend structure
+
+Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starter/tar.gz/refs/heads/v3) template as an example.
+
+```diff
++ ├─┬ electron
++ │ └── main.ts
+  ├─┬ public
+  │ └── favicon.ico
+  ├── .gitignore
+  ├── .npmrc
+  ├── index.html
+  ├── app.vue
+  ├── nuxt.config.ts
+  ├── package.json
+  ├── README.md
+  └── tsconfig.json
+```
 
 ## Notes
 By default, we force the App to run in SPA mode since we don't need SSR for desktop apps.
