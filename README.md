@@ -1,4 +1,4 @@
-# nuxt-electron
+# Nuxt Electron
 
 Integrate Nuxt and Electron
 
@@ -7,38 +7,35 @@ Integrate Nuxt and Electron
 
 ![screenshort.png](https://github.com/caoxiemeihao/nuxt-electron/blob/main/screenshot.png?raw=true)
 
-## Install
+## Features
+
+- 🚀 High-performance (Not Bundle, based on esbuild)
+- 📦 Out of the box
+- 🔥 Hot restart
+
+## Quick Setup
+
+1. Add the following dependency to your project
 
 ```sh
 npm i -D nuxt-electron vite-electron-plugin electron electron-builder
 ```
 
-## Examples
-
-- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
-- [nuxt-electron-trpc-prisma](https://github.com/gurvancampion/nuxt-electron-trpc-prisma)
-
-## Usage
-
-nuxt.config.ts
+2. Add `nuxt-electron` to the modules section of `nuxt.config.ts`
 
 ```ts
-import type { ElectronOptions } from 'nuxt-electron'
-
 export default defineNuxtConfig({
   modules: [
-    ['nuxt-electron', <ElectronOptions>{
-      include: ['electron'],
-    }],
+    ['nuxt-electron'],
   ],
 })
 ```
 
-**This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options.**
+That's it! You can now use Electron in your Nuxt app ✨
 
 ## Recommend structure
 
-Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starter/tar.gz/refs/heads/v3) template as an example.
+Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starter/tar.gz/refs/heads/v3) template as an example
 
 ```diff
 + ├─┬ electron
@@ -55,5 +52,29 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
+## ElectronOptions
+
+> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
+
+Here is the default `nuxt-electron` options
+
+```ts
+import type { ElectronOptions } from 'nuxt-electron'
+
+export default defineNuxtConfig({
+  modules: [
+    ['nuxt-electron', <ElectronOptions>{
+      include: ['electron'],
+      outDir: 'dist-electron',
+    }],
+  ],
+})
+```
+
+## Examples
+
+- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
+- [nuxt-electron-trpc-prisma](https://github.com/gurvancampion/nuxt-electron-trpc-prisma)
+
 ## Notes
-By default, we force the App to run in SPA mode since we don't need SSR for desktop apps.
+By default, we force the App to run in SPA mode since we don't need SSR for desktop apps
