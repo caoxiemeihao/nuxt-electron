@@ -1,6 +1,6 @@
 {
   "name": "nuxt-electron",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Nuxt Integration with Electron",
   "main": "index.mjs",
   "types": "types",
