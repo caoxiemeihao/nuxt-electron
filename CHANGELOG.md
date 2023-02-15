@@ -1,3 +1,9 @@
+## 0.4.0 (2023-02-15)
+
+#### Main Changed
+
+- a48a15a feat: add `meta`, better default `options`
+
 ## 0.3.1 (2023-01-01)
 
 - 9c845f2 fix: correct `baseURL`

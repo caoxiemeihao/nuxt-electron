@@ -7,15 +7,22 @@ import {
   startup,
 } from 'vite-electron-plugin'
 
-export interface ElectronOptions extends Configuration { }
+export interface ElectronOptions extends Partial<Configuration> { }
 
 export default defineNuxtModule<ElectronOptions>({
+  meta: {
+    name: 'nuxt-electron',
+    configKey: 'electron',
+    compatibility: {
+      nuxt: '>=3.0.0',
+    },
+  },
+  defaults: {
+    include: ['electron'],
+    outDir: 'dist-electron',
+  },
   setup(options, nuxt) {
     const isProduction = process.env.NODE_ENV === 'production'
-
-    options.outDir ??= 'dist-electron'
-    options.watch ??= {}
-    options.plugins ??= []
 
     // Force to SPA mode always since we don't need SSR for a desktop app.
     nuxt.options.ssr = false
@@ -36,6 +43,9 @@ export default defineNuxtModule<ElectronOptions>({
     nuxt.hooks.addHooks({
       // For development
       listen(server, listener) {
+        options.watch ??= {}
+        options.plugins ??= []
+
         const addressInfo = server.address() as AddressInfo
         Object.assign(process.env, {
           // This is required, and it is used in Electron-Main.
@@ -49,11 +59,11 @@ export default defineNuxtModule<ElectronOptions>({
           },
         })
 
-        watch(options)
+        watch(options as Configuration)
       },
       // For build
       'build:done'() {
-        if (isProduction) build(options)
+        if (isProduction) build(options as Configuration)
       }
     })
   }
