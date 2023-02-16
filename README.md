@@ -1,11 +1,21 @@
-# Nuxt Electron
+<p align="center">
+  <img width="170" src="https://github.com/caoxiemeihao/nuxt-electron/raw/main/logo.svg?raw=true">
+</p>
 
-Integrate Nuxt and Electron
+<div align="center">
+  <h1>nuxt-electron</h1>
+</div>
+<p align="center">Integrate Nuxt and Electron</p>
+<p align="center">
+  <a href="https://npmjs.org/package/nuxt-electron">
+    <img src="https://img.shields.io/npm/v/nuxt-electron.svg">
+  </a>
+  <a href="https://npmjs.org/package/nuxt-electron">
+    <img src="https://img.shields.io/npm/dm/nuxt-electron.svg">
+  </a>
+</p>
 
-[![NPM version](https://img.shields.io/npm/v/nuxt-electron.svg)](https://npmjs.org/package/nuxt-electron)
-[![NPM Downloads](https://img.shields.io/npm/dm/nuxt-electron.svg)](https://npmjs.org/package/nuxt-electron)
-
-![screenshort.png](https://github.com/caoxiemeihao/nuxt-electron/blob/main/screenshot.png?raw=true)
+<br/>
 
 ## Features
 
