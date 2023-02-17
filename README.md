@@ -36,7 +36,7 @@ npm i -D nuxt-electron vite-electron-plugin electron electron-builder
 ```ts
 export default defineNuxtConfig({
   modules: [
-    ['nuxt-electron'],
+    'nuxt-electron',
   ],
 })
 ```
@@ -73,11 +73,12 @@ import type { ElectronOptions } from 'nuxt-electron'
 
 export default defineNuxtConfig({
   modules: [
-    ['nuxt-electron', <ElectronOptions>{
-      include: ['electron'],
-      outDir: 'dist-electron',
-    }],
+    'nuxt-electron'
   ],
+  electron: {
+    include: ['electron'],
+    outDir: 'dist-electron',
+  }
 })
 ```
 
