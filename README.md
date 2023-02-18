@@ -3,16 +3,17 @@
 </p>
 
 <div align="center">
-  <h1>nuxt-electron</h1>
+  <h1>Nuxt Electron</h1>
 </div>
 <p align="center">Integrate Nuxt and Electron</p>
 <p align="center">
   <a href="https://npmjs.org/package/nuxt-electron">
-    <img src="https://img.shields.io/npm/v/nuxt-electron.svg">
+    <img src="https://img.shields.io/npm/v/nuxt-electron.svg?colorA=18181B&colorB=28CF8D">
   </a>
   <a href="https://npmjs.org/package/nuxt-electron">
-    <img src="https://img.shields.io/npm/dm/nuxt-electron.svg">
+    <img src="https://img.shields.io/npm/dm/nuxt-electron.svg?colorA=18181B&colorB=28CF8D">
   </a>
+  <img src="https://camo.githubusercontent.com/1355d11db24d82f2b23bbe4957178a05c7d5ca0948ddfc9eec38f5a6864fe4e5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6e7578742f6e7578742e7376673f7374796c653d666c617426636f6c6f72413d31383138314226636f6c6f72423d323843463844">
 </p>
 
 <br/>
@@ -28,10 +29,17 @@
 1. Add the following dependency to your project
 
 ```sh
-npm i -D nuxt-electron vite-electron-plugin electron electron-builder
+# Using pnpm
+pnpm add -D nuxt-electron vite-electron-plugin electron electron-builder
+
+# Using yarn
+yarn add --dev nuxt-electron vite-electron-plugin electron electron-builder
+
+# Using npm
+npm install --save-dev nuxt-electron vite-electron-plugin electron electron-builder
 ```
 
-2. Add `nuxt-electron` to the modules section of `nuxt.config.ts`
+2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
@@ -62,15 +70,13 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
-## ElectronOptions
+## Electron options
 
 > This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
 
 Here is the default `nuxt-electron` options
 
 ```ts
-import type { ElectronOptions } from 'nuxt-electron'
-
 export default defineNuxtConfig({
   modules: [
     'nuxt-electron'
@@ -78,7 +84,7 @@ export default defineNuxtConfig({
   electron: {
     include: ['electron'],
     outDir: 'dist-electron',
-  }
+  },
 })
 ```
 

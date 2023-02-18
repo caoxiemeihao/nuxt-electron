@@ -7,6 +7,9 @@ import {
   startup,
 } from 'vite-electron-plugin'
 
+// Fix tsc build error
+import { NuxtModule } from '@nuxt/schema'
+
 export interface ElectronOptions extends Partial<Configuration> { }
 
 export default defineNuxtModule<ElectronOptions>({
@@ -67,4 +70,4 @@ export default defineNuxtModule<ElectronOptions>({
       }
     })
   }
-}) as any
+})

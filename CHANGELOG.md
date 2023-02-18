@@ -1,3 +1,13 @@
+## 0.4.1 (2023-02-18)
+
+#### Main Changed
+
+- abf84f8 fix: types error #9
+
+#### PR
+
+- @Atinux docs: update options #8
+
 ## 0.4.0 (2023-02-15)
 
 #### Main Changed
