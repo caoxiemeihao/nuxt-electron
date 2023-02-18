@@ -2,12 +2,13 @@
   "name": "nuxt-electron",
   "version": "0.4.0",
   "description": "Nuxt Integration with Electron",
-  "main": "index.mjs",
-  "types": "types",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     }
   },
   "repository": {
@@ -17,9 +18,9 @@
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm run types && vite build",
+    "build": "vite build",
     "dev": "vite build --watch",
-    "types": "rm -rf types && tsc -p tsconfig.build.json",
+    "types": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -36,9 +37,8 @@
   },
   "files": [
     "electron-env.d.ts",
-    "types",
-    "index.mjs",
-    "index.js"
+    "dist",
+    "types"
   ],
   "keywords": [
     "nuxt",
