@@ -5,7 +5,9 @@
 <div align="center">
   <h1>Nuxt Electron</h1>
 </div>
-<p align="center">Integrate Nuxt and Electron</p>
+<p align="center">
+  <code>Integrate Nuxt and Electron</code>
+</p>
 <p align="center">
   <a href="https://npmjs.org/package/nuxt-electron">
     <img src="https://img.shields.io/npm/v/nuxt-electron.svg?colorA=18181B&colorB=28CF8D">
@@ -49,9 +51,27 @@ export default defineNuxtConfig({
 })
 ```
 
+3. Create the `electron/main.ts` file and type the following code
+
+```ts
+import { app, BrowserWindow } from 'electron'
+
+app.whenReady().then(() => {
+  new BrowserWindow().loadURL(process.env.VITE_DEV_SERVER_URL)
+})
+```
+
+4. Add the `main` entry to `package.json`
+
+```diff
+{
++ "main": "dist-electron/main.js"
+}
+```
+
 That's it! You can now use Electron in your Nuxt app ✨
 
-## Recommend structure
+## Recommend Structure
 
 Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starter/tar.gz/refs/heads/v3) template as an example
 
@@ -70,7 +90,7 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
-## Electron options
+## Electron Options
 
 > This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
 
