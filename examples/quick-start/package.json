@@ -4,7 +4,7 @@
   "private": true,
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
-  "main": "dist-electron/main/index.js",
+  "main": "dist-electron/main.js",
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build --prerender && electron-builder"

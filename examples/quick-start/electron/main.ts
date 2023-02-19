@@ -11,7 +11,7 @@ import path from 'path'
 // │ ├─┬ renderer
 // │ │ └── index.html
 
-process.env.ROOT = path.join(__dirname, '../..')
+process.env.ROOT = path.join(__dirname, '..')
 process.env.DIST = path.join(process.env.ROOT, 'dist-electron')
 process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? path.join(process.env.ROOT, 'public')
