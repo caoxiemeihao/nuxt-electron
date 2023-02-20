@@ -22,7 +22,7 @@
 
 ## Features
 
-- 🚀 High-performance (Not Bundle, based on esbuild)
+- 🚀 High-performance <sub><sup>(Not Bundle, based on esbuild)</sup></sub>
 - 📦 Out of the box
 - 🔥 Hot restart
 
@@ -71,6 +71,24 @@ app.whenReady().then(() => {
 
 That's it! You can now use Electron in your Nuxt app ✨
 
+## Electron Options
+
+> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
+
+Here is the default `electron` options
+
+```ts
+export default defineNuxtConfig({
+  modules: [
+    'nuxt-electron',
+  ],
+  electron: {
+    include: ['electron'],
+    outDir: 'dist-electron',
+  },
+})
+```
+
 ## Recommend Structure
 
 Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starter/tar.gz/refs/heads/v3) template as an example
@@ -90,25 +108,7 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
-## Electron Options
-
-> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
-
-Here is the default `nuxt-electron` options
-
-```ts
-export default defineNuxtConfig({
-  modules: [
-    'nuxt-electron'
-  ],
-  electron: {
-    include: ['electron'],
-    outDir: 'dist-electron',
-  },
-})
-```
-
-## Examples
+## [Examples](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples)
 
 - [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
 - [nuxt-electron-trpc-prisma](https://github.com/gurvancampion/nuxt-electron-trpc-prisma)
