@@ -2,23 +2,13 @@
   <img width="170" src="https://github.com/caoxiemeihao/nuxt-electron/raw/main/logo.svg?raw=true">
 </p>
 
-<div align="center">
-  <h1>Nuxt Electron</h1>
-</div>
-<p align="center">
-  <code>Integrate Nuxt and Electron</code>
-</p>
-<p align="center">
-  <a href="https://npmjs.org/package/nuxt-electron">
-    <img src="https://img.shields.io/npm/v/nuxt-electron.svg?colorA=18181B&colorB=28CF8D">
-  </a>
-  <a href="https://npmjs.org/package/nuxt-electron">
-    <img src="https://img.shields.io/npm/dm/nuxt-electron.svg?colorA=18181B&colorB=28CF8D">
-  </a>
-  <img src="https://camo.githubusercontent.com/1355d11db24d82f2b23bbe4957178a05c7d5ca0948ddfc9eec38f5a6864fe4e5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6e7578742f6e7578742e7376673f7374796c653d666c617426636f6c6f72413d31383138314226636f6c6f72423d323843463844">
-</p>
+# Nuxt Electron
 
-<br/>
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![License][license-src]][license-href]
+
+> Integrate Nuxt and Electron
 
 ## Features
 
@@ -115,3 +105,13 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
 
 ## Notes
 By default, we force the App to run in SPA mode since we don't need SSR for desktop apps
+
+<!-- Badges -->
+[npm-version-src]: https://img.shields.io/npm/v/nuxt-electron/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/nuxt-electron
+
+[npm-downloads-src]: https://img.shields.io/npm/dm/nuxt-electron.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/nuxt-electron
+
+[license-src]: https://img.shields.io/npm/l/nuxt-electron.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/nuxt-electron
