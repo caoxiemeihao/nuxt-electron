@@ -3,5 +3,5 @@
   "compilerOptions": {
     "outDir": "types"
   },
-  "include": ["src/index.ts", "electron-env.d.ts"]
+  "include": ["src/*.ts", "electron-env.d.ts"]
 }

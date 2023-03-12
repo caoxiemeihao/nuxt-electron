@@ -10,6 +10,7 @@ importers:
       typescript: ^4.9.5
       vite: ^4.1.1
       vite-electron-plugin: ^0.7.4
+      vite-plugin-electron-renderer: ^0.12.1
     devDependencies:
       '@types/node': 18.13.0
       esbuild: 0.17.8
@@ -17,6 +18,7 @@ importers:
       typescript: 4.9.5
       vite: 4.1.1_@types+node@18.13.0
       vite-electron-plugin: 0.7.4_esbuild@0.17.8
+      vite-plugin-electron-renderer: 0.12.1
 
   examples/quick-start:
     specifiers:
@@ -4797,6 +4799,10 @@ packages:
       readable-stream: 2.3.7
     dev: true
 
+  /lib-esm/0.3.0:
+    resolution: {integrity: sha512-P7YcG7OnoaGL2h4j46g/m0P2xHMXlYf+0iCDvVrEfzUVxLe+abytgd2VjUhj9puqEgqRGEDbT504YWj75jHacA==}
+    dev: true
+
   /lilconfig/2.0.6:
     resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
@@ -7653,6 +7659,12 @@ packages:
       vscode-languageserver: 7.0.0
       vscode-languageserver-textdocument: 1.0.7
       vscode-uri: 3.0.6
+    dev: true
+
+  /vite-plugin-electron-renderer/0.12.1:
+    resolution: {integrity: sha512-n0w8vrQFafaY1tmIPIQAck4zLanGLYcthvGttH00KRJg47Sjh2mp5Hb8VJ3l8FmpnYTobnl949+N4sunTR1WBA==}
+    dependencies:
+      lib-esm: 0.3.0
     dev: true
 
   /vite-plugin-electron/0.11.1:
