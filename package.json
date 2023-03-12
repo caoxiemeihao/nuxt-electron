@@ -1,6 +1,6 @@
 {
   "name": "nuxt-electron",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Nuxt Integration with Electron",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -9,6 +9,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.cjs"
     }
   },
   "repository": {
@@ -25,7 +30,16 @@
   },
   "peerDependencies": {
     "esbuild": "*",
-    "vite-electron-plugin": "*"
+    "vite-electron-plugin": "*",
+    "vite-plugin-electron-renderer": "*"
+  },
+  "peerDependenciesMeta": {
+    "esbuild": {
+      "optional": true
+    },
+    "vite-plugin-electron-renderer": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
@@ -33,7 +47,8 @@
     "nuxt": "^3.2.0",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
-    "vite-electron-plugin": "^0.7.4"
+    "vite-electron-plugin": "^0.7.4",
+    "vite-plugin-electron-renderer": "^0.12.1"
   },
   "files": [
     "electron-env.d.ts",

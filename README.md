@@ -22,13 +22,13 @@
 
 ```sh
 # Using pnpm
-pnpm add -D nuxt-electron vite-electron-plugin electron electron-builder
+pnpm add -D nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
 
 # Using yarn
-yarn add --dev nuxt-electron vite-electron-plugin electron electron-builder
+yarn add --dev nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
 
 # Using npm
-npm install --save-dev nuxt-electron vite-electron-plugin electron electron-builder
+npm install --save-dev nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
 ```
 
 2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
@@ -75,6 +75,22 @@ export default defineNuxtConfig({
   electron: {
     include: ['electron'],
     outDir: 'dist-electron',
+  },
+})
+```
+
+Use Node.js in Renderer process
+
+```ts
+export default defineNuxtConfig({
+  modules: [
+    'nuxt-electron',
+  ],
+  electron: {
+    /**
+     * @see https://github.com/electron-vite/vite-plugin-electron-renderer
+     */
+    renderer: {},
   },
 })
 ```

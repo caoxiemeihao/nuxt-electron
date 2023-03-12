@@ -9,7 +9,10 @@ export default defineConfig({
   build: {
     minify: false,
     lib: {
-      entry: 'src/index.ts',
+      entry: {
+        index: 'src/index.ts',
+        'cjs-shim': 'src/cjs-shim.ts',
+      },
       formats: ['cjs', 'es'],
       fileName: format => format === 'es' ? '[name].mjs' : '[name].cjs',
     },
@@ -20,6 +23,7 @@ export default defineConfig({
         'esbuild',
         'vite',
         'vite-electron-plugin',
+        'vite-plugin-electron-renderer',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),
         ...Object.keys(pkg.dependencies ?? {}),

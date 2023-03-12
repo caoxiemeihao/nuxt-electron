@@ -1,3 +1,9 @@
+## 0.4.2 (2023-03-12)
+
+#### Main Changed
+
+c0a9c54 feat: support use Node.js in Renderer process #14
+
 ## 0.4.1 (2023-02-18)
 
 #### Main Changed
