@@ -38,13 +38,13 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
-    "esbuild": "^0.17.8",
-    "nuxt": "^3.2.0",
+    "@types/node": "^18.15.11",
+    "esbuild": "^0.17.14",
+    "nuxt": "^3.2.2",
     "typescript": "^4.9.5",
-    "vite": "^4.1.1",
-    "vite-electron-plugin": "^0.7.4",
-    "vite-plugin-electron-renderer": "^0.12.1"
+    "vite": "^4.1.4",
+    "vite-electron-plugin": "latest",
+    "vite-plugin-electron-renderer": "latest"
   },
   "files": [
     "electron-env.d.ts",
