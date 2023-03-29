@@ -96,12 +96,13 @@ export interface ElectronOptions extends Partial<Configuration> {
    * export default defineNuxtConfig({
    *   ssr: false,
    *   app: {
-   *     buildAssetsDir: '/',
    *     baseURL: './',
+   *     buildAssetsDir: '/',
    *   },
    *   runtimeConfig: {
    *     app: {
    *       baseURL: './',
+   *       buildAssetsDir: '/',
    *     },
    *   },
    * })
