@@ -1,3 +1,8 @@
+## 0.4.4 (2023-03-29)
+
+- 57f06ec docs: v0.4.4 (#21, #24)
+- 00dbfd7 feat: support customize default behavior
+
 ## 0.4.3 (2023-03-29)
 
 - 12d8c58 refactor: cleanup
