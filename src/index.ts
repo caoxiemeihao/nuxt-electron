@@ -100,7 +100,7 @@ export default defineNuxtModule<ElectronOptions>({
 /** Opinionated config for Electron */
 function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
   // Must determine the production environment
-  if (isProduction && options.disableDefaultOptions !== false) {
+  if (isProduction && !options.disableDefaultOptions) {
     // A Desktop App should be SPA
     nuxt.options.ssr = false // true
     // Fix path to make it works with Electron protocol `file://`
