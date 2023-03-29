@@ -1,6 +1,6 @@
 {
   "name": "nuxt-electron",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Nuxt Integration with Electron",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -10,11 +10,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.mjs",
-      "require": "./dist/*.cjs"
-    }
+    "./*": "./*"
   },
   "repository": {
     "type": "git",
