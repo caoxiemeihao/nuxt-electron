@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
-  modules: [
-    'nuxt-electron',
-  ],
-})
+  modules: ["nuxt-electron"],
+  electron: {
+    disableSPAMode: true,
+  },
+});
