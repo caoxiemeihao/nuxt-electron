@@ -25,6 +25,10 @@ function bootstrap() {
   win = new BrowserWindow({
     webPreferences: {
       preload,
+      nodeIntegrationInWorker: true,
+      contextIsolation: false,
+      nodeIntegration: true,
+      webSecurity: false,
     },
   })
 
