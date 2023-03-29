@@ -63,8 +63,6 @@ That's it! You can now use Electron in your Nuxt app ✨
 
 ## Electron Options
 
-> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
-
 Here is the default `electron` options
 
 ```ts
@@ -79,20 +77,38 @@ export default defineNuxtConfig({
 })
 ```
 
-Use Node.js in Renderer process
+Full types definition
+
+> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
 
 ```ts
-export default defineNuxtConfig({
-  modules: [
-    'nuxt-electron',
-  ],
-  electron: {
-    /**
-     * @see https://github.com/electron-vite/vite-plugin-electron-renderer
-     */
-    renderer: {},
-  },
-})
+import type { Configuration } from 'vite-electron-plugin'
+
+export interface ElectronOptions extends Partial<Configuration> {
+  /**
+   * @see https://github.com/electron-vite/vite-plugin-electron-renderer
+   */
+  renderer?: Parameters<typeof import('vite-plugin-electron-renderer').default>[0]
+  /**
+   * nuxt-electron will modify some options by default
+   * 
+   * ```js
+   * export default defineNuxtConfig({
+   *   ssr: false,
+   *   app: {
+   *     buildAssetsDir: '/',
+   *     baseURL: './',
+   *   },
+   *   runtimeConfig: {
+   *     app: {
+   *       baseURL: './',
+   *     },
+   *   },
+   * })
+   * ```
+   */
+  disableDefaultOptions?: boolean
+}
 ```
 
 ## Recommend Structure
@@ -121,6 +137,8 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
 
 ## Notes
 By default, we force the App to run in SPA mode since we don't need SSR for desktop apps
+
+If you want to fully customize the default behavior, you can disable it by `disableDefaultOptions`
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/nuxt-electron/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
