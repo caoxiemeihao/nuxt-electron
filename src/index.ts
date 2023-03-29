@@ -1,5 +1,3 @@
-import path from 'path'
-import { fileURLToPath } from 'url'
 import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
 import {
@@ -9,12 +7,10 @@ import {
   startup,
 } from 'vite-electron-plugin'
 
-const cjs__dirname = typeof __dirname === 'undefined'
-  ? path.dirname(fileURLToPath(import.meta.url))
-  : __dirname
+const isProduction = process.env.NODE_ENV === 'production'
 
 // Fix tsc build error
-import { NuxtModule } from '@nuxt/schema'
+import { NuxtModule, Nuxt } from '@nuxt/schema'
 
 export interface ElectronOptions extends Partial<Configuration> {
   /**
@@ -36,35 +32,18 @@ export default defineNuxtModule<ElectronOptions>({
     outDir: 'dist-electron',
   },
   async setup(options, nuxt) {
-    const isProduction = process.env.NODE_ENV === 'production'
+    adaptElectronConfig(options, nuxt)
 
-    // Force to SPA mode always since we don't need SSR for a desktop app.
-    nuxt.options.ssr = false
-
-    if (isProduction) {
-      // Fix path to make it works with Electron protocol `file://`
-      nuxt.options.app.baseURL ??= './'
-      if (nuxt.options.app.baseURL.startsWith('/')) {
-        nuxt.options.app.baseURL = '.' + nuxt.options.app.baseURL
-      }
-      nuxt.options.runtimeConfig.app.baseURL ??= './'
-      if (nuxt.options.runtimeConfig.app.baseURL.startsWith('/')) {
-        nuxt.options.runtimeConfig.app.baseURL = '.' + nuxt.options.runtimeConfig.app.baseURL
-      }
-      nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
-    }
-
-    // Use Node.js in Renderer process
     if (options.renderer) {
-      // For Vite
-      nuxt.options.vite.plugins ??= []
-      nuxt.options.vite.plugins.push((await import('vite-plugin-electron-renderer')).default(options.renderer))
-
-      // TODO: For Webpack
-
-      nuxt.options.nitro.plugins ??= []
-      nuxt.options.nitro.plugins.push(path.join(cjs__dirname, 'cjs-shim')) // #14
+      nodeIntegration(options, nuxt)
     }
+
+    nuxt.hook('build:manifest', (manifest) => {
+      for (const key in manifest) {
+        // or other logic
+        manifest[key].dynamicImports = []
+      }
+    })
 
     nuxt.hooks.addHooks({
       // For development
@@ -94,3 +73,41 @@ export default defineNuxtModule<ElectronOptions>({
     })
   }
 })
+
+/** Opinionated config for Electrono */
+function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
+  // Force to SPA mode always since we don't need SSR for a desktop app.
+  nuxt.options.ssr = false
+  nuxt.options.app.buildAssetsDir = '/' // #16
+  nuxt.options.app.baseURL = './'
+  nuxt.options.runtimeConfig.app.baseURL = './'
+
+  if (isProduction) {
+    // TODO: calculate correct `require(id)`
+
+    // Fix path to make it works with Electron protocol `file://`
+    /*
+    nuxt.options.app.baseURL ??= './'
+    if (nuxt.options.app.baseURL.startsWith('/')) {
+      nuxt.options.app.baseURL = '.' + nuxt.options.app.baseURL
+    }
+    nuxt.options.runtimeConfig.app.baseURL ??= './'
+    if (nuxt.options.runtimeConfig.app.baseURL.startsWith('/')) {
+      nuxt.options.runtimeConfig.app.baseURL = '.' + nuxt.options.runtimeConfig.app.baseURL
+    }
+    */
+
+    nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
+  }
+}
+
+/** Use Node.js in Renderer process */
+async function nodeIntegration(options: ElectronOptions, nuxt: Nuxt) {
+  // For Vite
+  nuxt.options.vite.plugins ??= []
+  nuxt.options.vite.plugins.push((await import('vite-plugin-electron-renderer')).default(options.renderer))
+
+  // TODO: For Webpack
+
+  nuxt.options.nitro.plugins ??= []
+}
