@@ -102,15 +102,16 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
   if (!options.disableDefaultOptions) {
     // A Desktop App should be SPA
     nuxt.options.ssr = false // true
+
     // Fix path to make it works with Electron protocol `file://`
     nuxt.options.app.baseURL = './' // '/'
     nuxt.options.app.buildAssetsDir = '/' // '/_nuxt/' - #16
 
     nuxt.options.runtimeConfig.app.baseURL = './' // '/'
     nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
-  }
 
-  nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
+    nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
+  }
 }
 
 /** Use Node.js in Renderer process */
