@@ -1,3 +1,9 @@
+## 0.4.5 (2023-03-30)
+
+- a521612 chore: cleanup
+- 43ddd9f Merge pull request #26 from OyewoleOyedeji/main
+- c4a050f Fixed conditional checks
+
 ## 0.4.4 (2023-03-29)
 
 - 57f06ec docs: v0.4.4 (#21, #24)
