@@ -1,3 +1,10 @@
+## 0.5.0 (2023-05-21)
+
+- da27f13 refactor(v0.5.0): `vite-electron-plugin` -> `vite-electron-plugin`
+- 7e2579f chore: use pnpm8
+- 0480ae5 chore(examples): update quick-start
+- f782031 fix: `router` into `options.disableDefaultOptions`
+
 ## 0.4.5 (2023-03-30)
 
 - a521612 chore: cleanup

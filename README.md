@@ -12,9 +12,9 @@
 
 ## Features
 
-- 🚀 High-performance <sub><sup>(Not Bundle, based on esbuild)</sup></sub>
 - 📦 Out of the box
-- 🔥 Hot restart
+- 🔥 Hot restart <sub><sup>(Main process)</sup></sub>
+- 🚀 Hot reload <sub><sup>(Preload script)</sup></sub>
 
 ## Quick Setup
 
@@ -22,22 +22,28 @@
 
 ```sh
 # Using pnpm
-pnpm add -D nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
+pnpm add -D nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 
 # Using yarn
-yarn add --dev nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
+yarn add --dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 
 # Using npm
-npm install --save-dev nuxt-electron vite-electron-plugin vite-plugin-electron-renderer electron electron-builder
+npm install --save-dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 ```
 
 2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
-  modules: [
-    'nuxt-electron',
-  ],
+  modules: ['nuxt-electron'],
+  electron: {
+    build: [
+      {
+        // Main-Process entry file of the Electron App.
+        entry: 'electron/main.ts',
+      },
+    ],
+  },
 })
 ```
 
@@ -63,34 +69,38 @@ That's it! You can now use Electron in your Nuxt app ✨
 
 ## Electron Options
 
-Here is the default `electron` options
+> This is based on the `vite-plugin-electron`, see the **[Documents](https://github.com/electron-vite/vite-plugin-electron)** for more detailed options
 
 ```ts
-export default defineNuxtConfig({
-  modules: [
-    'nuxt-electron',
-  ],
-  electron: {
-    include: ['electron'],
-    outDir: 'dist-electron',
-  },
-})
-```
-
-Full types definition
-
-> This is based on the `vite-electron-plugin`, see the **[Documents](https://github.com/electron-vite/vite-electron-plugin#configuration)** for more detailed options
-
-```ts
-import type { Configuration } from 'vite-electron-plugin'
-
-export interface ElectronOptions extends Partial<Configuration> {
+export interface ElectronOptions {
+  /**
+   * `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
+   * 
+   * @example
+   * 
+   * ```js
+   * export default defineNuxtConfig({
+   *   modules: ['nuxt-electron'],
+   *   electron: {
+   *     build: [
+   *       {
+   *         // Main-Process entry file of the Electron App.
+   *         entry: 'electron/main.ts',
+   *       },
+   *     ],
+   *   },
+   * })
+   * ```
+   */
+  build: import('vite-plugin-electron').Configuration[],
   /**
    * @see https://github.com/electron-vite/vite-plugin-electron-renderer
    */
   renderer?: Parameters<typeof import('vite-plugin-electron-renderer').default>[0]
   /**
    * nuxt-electron will modify some options by default
+   * 
+   * @defaultValue
    * 
    * ```js
    * export default defineNuxtConfig({
@@ -150,3 +160,7 @@ If you want to fully customize the default behavior, you can disable it by `disa
 
 [license-src]: https://img.shields.io/npm/l/nuxt-electron.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://npmjs.com/package/nuxt-electron
+
+## TODO
+
+- [ ] write test
