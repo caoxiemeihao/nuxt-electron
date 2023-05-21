@@ -22,7 +22,7 @@ export default defineConfig({
         'electron',
         'esbuild',
         'vite',
-        'vite-electron-plugin',
+        'vite-plugin-electron',
         'vite-plugin-electron-renderer',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),

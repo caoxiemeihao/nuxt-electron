@@ -2,26 +2,49 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
+import type {
+  ResolvedConfig,
+  ViteDevServer,
+} from 'vite'
 import {
-  type Configuration,
   build,
-  watch,
   startup,
-} from 'vite-electron-plugin'
+} from 'vite-plugin-electron'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const isProduction = process.env.NODE_ENV === 'production'
 
 // Fix tsc build error
 import { NuxtModule, Nuxt } from '@nuxt/schema'
 
-export interface ElectronOptions extends Partial<Configuration> {
+export interface ElectronOptions {
+  /**
+   * `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
+   * 
+   * @example
+   * 
+   * ```js
+   * export default defineNuxtConfig({
+   *   modules: ['nuxt-electron'],
+   *   electron: {
+   *     build: [
+   *       {
+   *         // Main-Process entry file of the Electron App.
+   *         entry: 'electron/main.ts',
+   *       },
+   *     ],
+   *   },
+   * })
+   * ```
+   */
+  build: import('vite-plugin-electron').Configuration[],
   /**
    * @see https://github.com/electron-vite/vite-plugin-electron-renderer
    */
   renderer?: Parameters<typeof import('vite-plugin-electron-renderer').default>[0]
   /**
    * nuxt-electron will modify some options by default
+   * 
+   * @defaultValue
    * 
    * ```js
    * export default defineNuxtConfig({
@@ -42,6 +65,13 @@ export interface ElectronOptions extends Partial<Configuration> {
   disableDefaultOptions?: boolean
 }
 
+let options: ElectronOptions
+let nuxt: Nuxt
+let viteConfigResolve: (config: ResolvedConfig) => void
+const viteConfigPromise = new Promise<ResolvedConfig>(resolve => viteConfigResolve = resolve)
+let viteServerResolve: (server: ViteDevServer) => void
+const viteServerPromise = new Promise<ViteDevServer>(resolve => viteServerResolve = resolve)
+
 export default defineNuxtModule<ElectronOptions>({
   meta: {
     name: 'nuxt-electron',
@@ -50,50 +80,89 @@ export default defineNuxtModule<ElectronOptions>({
       nuxt: '>=3.0.0',
     },
   },
-  defaults: {
-    include: ['electron'],
-    outDir: 'dist-electron',
-  },
-  async setup(options, nuxt) {
-    adaptElectronConfig(options, nuxt)
-
-    if (options.renderer) {
-      nodeIntegration(options, nuxt)
-    }
-
-    nuxt.hook('build:manifest', (manifest) => {
-      for (const key in manifest) {
-        // or other logic
-        manifest[key].dynamicImports = []
+  hooks: {
+    'nitro:config'(nitroConfig) {
+      if (options.renderer) {
+        nitroConfig.plugins ??= []
+        // Since `vite-plugin-electron-renderer@0.13.7` it will no longer be mandatory to use the `cjs` format to build Renderer process
+        nitroConfig.plugins.push(path.join(__dirname, 'cjs-shim')) // #14
       }
-    })
+    },
+    async 'vite:extendConfig'(viteInlineConfig) {
+      viteInlineConfig.plugins ??= []
+      viteInlineConfig.plugins.push({
+        name: 'get-vite-config',
+        configResolved(config) {
+          viteConfigResolve(config)
+        },
+      })
 
-    nuxt.hooks.addHooks({
-      // For development
-      listen(server, listener) {
-        options.watch ??= {}
-        options.plugins ??= []
-
+      if (options.renderer) {
+        viteInlineConfig.plugins.push((await import('vite-plugin-electron-renderer')).default(options.renderer))
+      }
+    },
+    'vite:serverCreated'(server) {
+      viteServerResolve(server)
+    },
+    // For development
+    listen(server, listener) {
+      // For `viteConfig.promise` can able resolved
+      (async function _listen() {
         const addressInfo = server.address() as AddressInfo
         Object.assign(process.env, {
           // This is required, and it is used in Electron-Main.
           VITE_DEV_SERVER_URL: `http://localhost:${addressInfo.port}`,
         })
 
-        options.plugins!.push({
-          name: 'nuxt-electron:startup',
-          ondone() {
-            startup()
-          },
-        })
-
-        watch(options as Configuration)
-      },
-      // For build
-      'build:done'() {
-        if (isProduction) build(options as Configuration)
+        // https://github.com/electron-vite/vite-plugin-electron/blob/v0.11.2/src/index.ts#L37-L59
+        for (const config of options.build) {
+          config.vite ??= {}
+          config.vite.mode ??= (await viteConfigPromise).mode
+          config.vite.build ??= {}
+          config.vite.build.watch ??= {}
+          config.vite.plugins ??= []
+          config.vite.plugins.push({
+            name: 'nuxt-electron:startup',
+            closeBundle() {
+              if (config.onstart) {
+                config.onstart.call(this, {
+                  startup,
+                  reload() {
+                    viteServerPromise.then(server => server.ws.send({ type: 'full-reload' }))
+                  },
+                })
+              } else {
+                startup()
+              }
+            },
+          })
+          build(config)
+        }
+      }())
+    },
+    // For build
+    async 'build:done'() {
+      if (!nuxt.options.dev) {
+        // https://github.com/electron-vite/vite-plugin-electron/blob/v0.11.2/src/index.ts#L72-L76
+        for (const config of options.build) {
+          config.vite ??= {}
+          config.vite.mode ??= (await viteConfigPromise).mode
+          await build(config)
+        }
       }
-    })
+    },
+    'build:manifest'(manifest) {
+      for (const key in manifest) {
+        // or other logic
+        manifest[key].dynamicImports = []
+      }
+    },
+  },
+  async setup(_options, _nuxt) {
+    options = _options
+    nuxt = _nuxt
+
+    adaptElectronConfig(options, nuxt)
   }
 })
 
