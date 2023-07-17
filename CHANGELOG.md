@@ -1,3 +1,8 @@
+## 0.6.0 (2023-07-17)
+
+- 283a8b0 Merge pull request #38 from so1ve/patch-1
+- 49d5407 fix: types are missing
+
 ## 0.5.0 (2023-05-21)
 
 - da27f13 refactor(v0.5.0): `vite-electron-plugin` -> `vite-electron-plugin`
