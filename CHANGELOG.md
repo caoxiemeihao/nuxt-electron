@@ -1,11 +1,17 @@
 ## 0.6.0 (2023-07-17)
 
+- 4b396e3 fix(log): `vite-electron-plugin` -> `vite-plugin-electron`
+- fb3b856 v0.6.0
 - 283a8b0 Merge pull request #38 from so1ve/patch-1
 - 49d5407 fix: types are missing
 
+#### PR
+
+- @so1ve fix: types are missing #38
+
 ## 0.5.0 (2023-05-21)
 
-- da27f13 refactor(v0.5.0): `vite-electron-plugin` -> `vite-electron-plugin`
+- da27f13 refactor(v0.5.0): `vite-electron-plugin` -> `vite-plugin-electron`
 - 7e2579f chore: use pnpm8
 - 0480ae5 chore(examples): update quick-start
 - f782031 fix: `router` into `options.disableDefaultOptions`
