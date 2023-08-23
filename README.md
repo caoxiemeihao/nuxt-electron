@@ -47,7 +47,17 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Create the `electron/main.ts` file and type the following code
+3. Set `ssr` to `false` within `nuxt.config.ts`
+
+```diff
+export default defineNuxtConfig({
+    ...
+    ssr: false,
+    ...
+})
+```
+
+4. Create the `electron/main.ts` file and type the following code
 
 ```ts
 import { app, BrowserWindow } from 'electron'
@@ -57,7 +67,7 @@ app.whenReady().then(() => {
 })
 ```
 
-4. Add the `main` entry to `package.json`
+5. Add the `main` entry to `package.json`
 
 ```diff
 {
