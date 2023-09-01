@@ -23,10 +23,14 @@
 ```sh
 # Using pnpm
 pnpm add -D nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+```
 
+```sh
 # Using yarn
 yarn add --dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+```
 
+```sh
 # Using npm
 npm install --save-dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 ```
