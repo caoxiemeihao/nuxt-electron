@@ -179,6 +179,8 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
     nuxt.options.runtimeConfig.app.baseURL = './' // '/'
     nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
 
+    nuxt.options.nitro.runtimeConfig.app.baseURL = './'
+
     nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
   }
 }
