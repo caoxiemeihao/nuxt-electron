@@ -59,6 +59,13 @@ export interface ElectronOptions {
    *       buildAssetsDir: '/',
    *     },
    *   },
+   *   nitro: {
+   *     runtimeConfig: {
+   *       app: {
+   *         baseURL: './,
+   *       }
+  *      }
+   *   },
    * })
    * ```
    */
