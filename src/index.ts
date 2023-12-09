@@ -59,6 +59,13 @@ export interface ElectronOptions {
    *       buildAssetsDir: '/',
    *     },
    *   },
+   *   nitro: {
+   *     runtimeConfig: {
+   *       app: {
+   *         baseURL: './,
+   *       }
+  *      }
+   *   },
    * })
    * ```
    */
@@ -178,6 +185,11 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
 
     nuxt.options.runtimeConfig.app.baseURL = './' // '/'
     nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
+
+    // Only apply on build
+    if (!nuxt.options.dev) {
+      nuxt.options.nitro.runtimeConfig.app.baseURL = './'
+    }
 
     nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
   }
