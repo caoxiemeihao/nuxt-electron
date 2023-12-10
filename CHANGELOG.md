@@ -13,6 +13,10 @@
 - 1aac49c Merge pull request #46 from jofftiquez/patch-1
 - 6cc50d0 chore(README.md): update installation doc
 
+#### PR
+
+- @OlaAlsaker fix: types are missing #60
+
 ## 0.6.0 (2023-07-17)
 
 - 4b396e3 fix(log): `vite-electron-plugin` -> `vite-plugin-electron`
