@@ -3,7 +3,6 @@ import path from 'node:path'
 import { spawn } from 'node:child_process'
 import { builtinModules } from 'node:module'
 import { defineConfig } from 'vite'
-import pkg from './package.json'
 
 export default defineConfig({
   build: {
@@ -11,7 +10,6 @@ export default defineConfig({
     lib: {
       entry: {
         index: 'src/index.ts',
-        'cjs-shim': 'src/cjs-shim.ts',
       },
       formats: ['cjs', 'es'],
       fileName: format => format === 'es' ? '[name].mjs' : '[name].cjs',
@@ -20,13 +18,11 @@ export default defineConfig({
       external: [
         '@nuxt/kit',
         'electron',
-        'esbuild',
         'vite',
         'vite-plugin-electron',
         'vite-plugin-electron-renderer',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),
-        ...Object.keys(pkg.dependencies ?? {}),
       ],
       output: {
         exports: 'named',

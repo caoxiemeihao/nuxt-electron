@@ -1,5 +1,3 @@
-import path from 'path'
-import { fileURLToPath } from 'url'
 import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
 import type {
@@ -11,8 +9,6 @@ import {
   startup,
 } from 'vite-plugin-electron'
 import { ElectronSimpleOptions } from 'vite-plugin-electron/simple'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Fix tsc build error
 import { NuxtModule, Nuxt } from '@nuxt/schema'
@@ -65,13 +61,6 @@ export default defineNuxtModule<ElectronOptions>({
     },
   },
   hooks: {
-    'nitro:config'(nitroConfig) {
-      if (options.renderer) {
-        nitroConfig.plugins ??= []
-        // Since `vite-plugin-electron-renderer@0.13.7` it will no longer be mandatory to use the `cjs` format to build Renderer process
-        nitroConfig.plugins.push(path.join(__dirname, 'cjs-shim')) // #14
-      }
-    },
     async 'vite:extendConfig'(viteInlineConfig) {
       viteInlineConfig.plugins ??= []
       viteInlineConfig.plugins.push({
@@ -172,17 +161,4 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
 
     nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
   }
-}
-
-/** Use Node.js in Renderer process */
-async function nodeIntegration(options: ElectronOptions, nuxt: Nuxt) {
-  // For Vite
-  nuxt.options.vite.plugins ??= []
-  nuxt.options.vite.plugins.push((await import('vite-plugin-electron-renderer')).default(options.renderer))
-
-  // TODO: For Webpack
-
-  nuxt.options.nitro.plugins ??= []
-  // Since `vite-plugin-electron-renderer@0.13.7` it will no longer be mandatory to use the `cjs` format to build Renderer process
-  nuxt.options.nitro.plugins.push(path.join(__dirname, 'cjs-shim')) // #14
 }
