@@ -8,12 +8,35 @@ import {
   build,
   startup,
 } from 'vite-plugin-electron'
-import { ElectronSimpleOptions } from 'vite-plugin-electron/simple'
 
 // Fix tsc build error
 import { NuxtModule, Nuxt } from '@nuxt/schema'
 
-export interface ElectronOptions extends ElectronSimpleOptions {
+export interface ElectronOptions {
+  /**
+   * `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
+   * 
+   * @example
+   * 
+   * ```js
+   * export default defineNuxtConfig({
+   *   modules: ['nuxt-electron'],
+   *   electron: {
+   *     build: [
+   *       {
+   *         // Main-Process entry file of the Electron App.
+   *         entry: 'electron/main.ts',
+   *       },
+   *     ],
+   *   },
+   * })
+   * ```
+   */
+  build: import('vite-plugin-electron').ElectronOptions[],
+  /**
+   * @see https://github.com/electron-vite/vite-plugin-electron-renderer
+   */
+  renderer?: Parameters<typeof import('vite-plugin-electron-renderer').default>[0]
   /**
    * nuxt-electron will modify some options by default
    * 
@@ -87,13 +110,8 @@ export default defineNuxtModule<ElectronOptions>({
           VITE_DEV_SERVER_URL: `http://localhost:${addressInfo.port}`,
         })
 
-        const configs = options.preload ? [options.main, options.preload] : [options.main]
-
         // https://github.com/electron-vite/vite-plugin-electron/blob/v0.11.2/src/index.ts#L37-L59
-        for (const [index, config] of Object.entries(configs)) {
-          const isPreload = index === '1' // [main, preload]
-          const reload = () => viteServerPromise.then(server => server.ws.send({ type: 'full-reload' }))
-
+        for (const config of options.build) {
           config.vite ??= {}
           config.vite.mode ??= (await viteConfigPromise).mode
           config.vite.build ??= {}
@@ -103,9 +121,14 @@ export default defineNuxtModule<ElectronOptions>({
             name: 'nuxt-electron:startup',
             closeBundle() {
               if (config.onstart) {
-                config.onstart.call(this, { startup, reload })
+                config.onstart.call(this, {
+                  startup,
+                  reload() {
+                    viteServerPromise.then(server => server.ws.send({ type: 'full-reload' }))
+                  },
+                })
               } else {
-                isPreload ? reload() : startup()
+                startup()
               }
             },
           })
@@ -117,7 +140,7 @@ export default defineNuxtModule<ElectronOptions>({
     async 'build:done'() {
       if (!nuxt.options.dev) {
         // https://github.com/electron-vite/vite-plugin-electron/blob/v0.11.2/src/index.ts#L72-L76
-        for (const config of options.preload ? [options.main, options.preload] : [options.main]) {
+        for (const config of options.build) {
           config.vite ??= {}
           config.vite.mode ??= (await viteConfigPromise).mode
           await build(config)
