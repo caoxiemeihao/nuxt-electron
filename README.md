@@ -96,7 +96,7 @@ export interface ElectronOptions {
    * })
    * ```
    */
-  build: import('vite-plugin-electron').Configuration[],
+  build: import('vite-plugin-electron').ElectronOptions[],
   /**
    * @see https://github.com/electron-vite/vite-plugin-electron-renderer
    */
@@ -118,6 +118,13 @@ export interface ElectronOptions {
    *       baseURL: './',
    *       buildAssetsDir: '/',
    *     },
+   *   },
+   *   nitro: {
+   *     runtimeConfig: {
+   *       app: {
+   *         baseURL: './,
+   *       }
+  *      }
    *   },
    * })
    * ```
