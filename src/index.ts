@@ -165,6 +165,8 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
 
     // Only apply on build
     if (!nuxt.options.dev) {
+      nuxt.options.nitro.runtimeConfig ??= {}
+      nuxt.options.nitro.runtimeConfig.app ??= {}
       nuxt.options.nitro.runtimeConfig.app.baseURL = './'
     }
 
