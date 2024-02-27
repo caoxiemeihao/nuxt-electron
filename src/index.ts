@@ -182,6 +182,6 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
       nuxt.options.nitro.runtimeConfig.app.baseURL = './'
     }
 
-    nuxt.options.router.options.hashMode ??= true // Avoid 404 errors
+    nuxt.options.router.options.hashMode = true // Avoid 404 errors
   }
 }
