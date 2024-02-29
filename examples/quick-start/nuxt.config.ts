@@ -16,5 +16,5 @@ export default defineNuxtConfig({
       },
     ],
     renderer: {},
-  },
+  }
 })
