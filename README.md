@@ -126,6 +126,11 @@ export interface ElectronOptions {
    *       }
   *      }
    *   },
+      router: {
+        options: {
+          hashMode: true,
+        }
+      }
    * })
    * ```
    */
