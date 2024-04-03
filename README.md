@@ -21,17 +21,6 @@
 1. Add the following dependency to your project
 
 ```sh
-# Using pnpm
-npx nuxi@latest module add electron
-```
-
-```sh
-# Using yarn
-npx nuxi@latest module add electron
-```
-
-```sh
-# Using npm
 npx nuxi@latest module add electron
 ```
 
