@@ -22,17 +22,17 @@
 
 ```sh
 # Using pnpm
-pnpm add -D nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+npx nuxi@latest module add electron
 ```
 
 ```sh
 # Using yarn
-yarn add --dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+npx nuxi@latest module add electron
 ```
 
 ```sh
 # Using npm
-npm install --save-dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+npx nuxi@latest module add electron
 ```
 
 2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
