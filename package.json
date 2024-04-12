@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/caoxiemeihao/nuxt-electron.git"
   },
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "Leo Wang(草鞋没号) <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
     "build": "vite build",
