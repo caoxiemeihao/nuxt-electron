@@ -1,7 +1,6 @@
-/**
- * @see https://www.electron.build/configuration/configuration
- */
+// @see - https://www.electron.build/configuration/configuration
 {
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "your.app.id",
   "asar": false,
   "directories": {

@@ -1,3 +1,22 @@
+## 0.7.0 (2023-12-10)
+
+- bbedbfe chore: bump deps
+- 8714721 chore: cleanup
+- 0c9c9db refactor: remove simple API
+- 9806db3 chore: remove cjs-shim(since vite-plugin-electron-renderer@0.13.7)
+- dfcaa8a fix: types warning
+- e82cc15 refactor: use the simple API of vite-plugin-electron :)
+- f11608a (github/main, main) Merge pull request #60 from OlaAlsaker/fix-nitro-config
+- 5aaee64 fix: set baseUrl on build only
+- 0ae87b8 fix: update jsdocs for `disableDefaultOptions`
+- 40bda05 fix: override baseURL in Nitro
+- 1aac49c Merge pull request #46 from jofftiquez/patch-1
+- 6cc50d0 chore(README.md): update installation doc
+
+#### PR
+
+- @OlaAlsaker fix: types are missing #60
+
 ## 0.6.0 (2023-07-17)
 
 - 4b396e3 fix(log): `vite-electron-plugin` -> `vite-plugin-electron`

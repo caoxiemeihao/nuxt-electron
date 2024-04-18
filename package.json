@@ -1,6 +1,6 @@
 {
   "name": "nuxt-electron",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Nuxt Integration with Electron",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/caoxiemeihao/nuxt-electron.git"
   },
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "Leo Wang(草鞋没号) <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
     "build": "vite build",
@@ -34,13 +34,13 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^20.4.2",
-    "esbuild": "^0.18.13",
-    "electron": "^25.3.0",
-    "nuxt": "^3.6.3",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.4",
-    "vite-plugin-electron": "^0.12.0",
+    "@types/node": "^20.12.7",
+    "esbuild": "^0.20.2",
+    "electron": "^29.3.0",
+    "nuxt": "^3.11.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8",
+    "vite-plugin-electron": "^0.28.4",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
   "files": [
