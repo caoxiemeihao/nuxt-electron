@@ -18,13 +18,26 @@
 
 ## Quick Setup
 
-1. Add the following dependency to your project
+1. Add `electron` module to project
 
 ```sh
-npx nuxi@latest module add electron
+npx nuxi module add electron
 ```
 
-2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
+2. Add the following dependency to your project
+
+```sh
+# Using pnpm
+pnpm add -D vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+
+# Using yarn
+yarn add --dev vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+
+# Using npm
+npm install --save-dev vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+```
+
+3. Add `electron` config to `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
@@ -40,7 +53,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Create the `electron/main.ts` file and type the following code
+4. Create the `electron/main.ts` file and type the following code
 
 ```ts
 import { app, BrowserWindow } from 'electron'
@@ -50,7 +63,7 @@ app.whenReady().then(() => {
 })
 ```
 
-4. Add the `main` entry to `package.json`
+5. Add the `main` entry to `package.json`
 
 ```diff
 {
@@ -146,9 +159,9 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
-## [Examples](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples)
+## Examples
 
-- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
+- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/quick-start)
 - [nuxt-electron-trpc-prisma](https://github.com/gurvancampion/nuxt-electron-trpc-prisma)
 
 ## Notes
