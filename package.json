@@ -34,13 +34,13 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "esbuild": "^0.19.8",
-    "electron": "^28.0.0",
-    "nuxt": "^3.8.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.7",
-    "vite-plugin-electron": "^0.14.1",
+    "@types/node": "^20.12.7",
+    "esbuild": "^0.20.2",
+    "electron": "^29.3.0",
+    "nuxt": "^3.11.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8",
+    "vite-plugin-electron": "^0.28.4",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
   "files": [
