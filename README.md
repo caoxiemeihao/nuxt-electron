@@ -18,24 +18,30 @@
 
 ## Quick Setup
 
-1. Add the following dependency to your project
+1. Add `electron` module to project
+
+```sh
+npx nuxi module add electron
+```
+
+2. Add the following dependency to your project
 
 ```sh
 # Using pnpm
-pnpm add -D nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+pnpm add -D vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 
 # Using yarn
-yarn add --dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+yarn add --dev vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 
 # Using npm
-npm install --save-dev nuxt-electron vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
+npm install --save-dev vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 ```
 
-2. Add `nuxt-electron` to the `modules` section of `nuxt.config.ts`
+3. Add `electron` and related config to `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['nuxt-electron'],
+  ...
   electron: {
     build: [
       {
@@ -44,16 +50,8 @@ export default defineNuxtConfig({
       },
     ],
   },
-})
-```
-
-3. Set `ssr` to `false` within `nuxt.config.ts`
-
-```diff
-export default defineNuxtConfig({
-    ...
-    ssr: false,
-    ...
+  ssr: false, // #43
+  ...
 })
 ```
 
@@ -102,7 +100,7 @@ export interface ElectronOptions {
    * })
    * ```
    */
-  build: import('vite-plugin-electron').Configuration[],
+  build: import('vite-plugin-electron').ElectronOptions[],
   /**
    * @see https://github.com/electron-vite/vite-plugin-electron-renderer
    */
@@ -125,6 +123,18 @@ export interface ElectronOptions {
    *       buildAssetsDir: '/',
    *     },
    *   },
+   *   nitro: {
+   *     runtimeConfig: {
+   *       app: {
+   *         baseURL: './,
+   *       }
+  *      }
+   *   },
+      router: {
+        options: {
+          hashMode: true,
+        }
+      }
    * })
    * ```
    */
@@ -151,9 +161,9 @@ Let's use the official [nuxt-starter-v3](https://codeload.github.com/nuxt/starte
   └── tsconfig.json
 ```
 
-## [Examples](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples)
+## Examples
 
-- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/examples/quick-start)
+- [quick-start](https://github.com/caoxiemeihao/nuxt-electron/tree/main/quick-start)
 - [nuxt-electron-trpc-prisma](https://github.com/gurvancampion/nuxt-electron-trpc-prisma)
 
 ## Notes
