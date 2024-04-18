@@ -37,11 +37,11 @@ yarn add --dev vite-plugin-electron vite-plugin-electron-renderer electron elect
 npm install --save-dev vite-plugin-electron vite-plugin-electron-renderer electron electron-builder
 ```
 
-3. Add `electron` config to `nuxt.config.ts`
+3. Add `electron` and related config to `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['nuxt-electron'],
+  ...
   electron: {
     build: [
       {
@@ -50,6 +50,8 @@ export default defineNuxtConfig({
       },
     ],
   },
+  ssr: false, // #43
+  ...
 })
 ```
 
