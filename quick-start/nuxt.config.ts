@@ -21,5 +21,6 @@ export default defineNuxtConfig({
     // If you want use Node.js in Renderer process, the `nodeIntegration` needs to be enabled in the Main process.
     // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
     renderer: {},
-  }
+  },
+  ssr: false, // #43
 })
