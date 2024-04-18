@@ -1,8 +1,8 @@
 # nuxt-electron-quick-start
 
-<center>
+<p align="center">
   <img width="140" src="public/logo.svg" >
-</center>
+</p>
 
 ## Template
 
