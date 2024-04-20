@@ -125,7 +125,7 @@ export default defineNuxtModule<ElectronOptions>({
                 config.onstart.call(this, {
                   startup,
                   reload() {
-                    viteServerPromise.then(server => server.hot.send({ type: 'full-reload' }))
+                    viteServerPromise.then(server => (server.hot || server.ws).send({ type: 'full-reload' }))
                   },
                 })
               } else {
