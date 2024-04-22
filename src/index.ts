@@ -116,6 +116,7 @@ export default defineNuxtModule<ElectronOptions>({
           config.vite.mode ??= (await viteConfigPromise).mode
           config.vite.build ??= {}
           config.vite.build.watch ??= {}
+          config.vite.build.minify ??= false
           config.vite.plugins ??= []
           config.vite.plugins.push({
             name: 'nuxt-electron:startup',
@@ -124,7 +125,7 @@ export default defineNuxtModule<ElectronOptions>({
                 config.onstart.call(this, {
                   startup,
                   reload() {
-                    viteServerPromise.then(server => server.hot.send({ type: 'full-reload' }))
+                    viteServerPromise.then(server => (server.hot || server.ws).send({ type: 'full-reload' }))
                   },
                 })
               } else {
