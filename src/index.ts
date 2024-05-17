@@ -1,5 +1,5 @@
 import { type AddressInfo } from 'net'
-import { defineNuxtModule } from '@nuxt/kit'
+import { defineNuxtModule,  } from '@nuxt/kit'
 import type {
   ResolvedConfig,
   ViteDevServer,
@@ -103,7 +103,7 @@ export default defineNuxtModule<ElectronOptions>({
     // For development
     listen(server, listener) {
       // For `viteConfig.promise` can able resolved
-      (async function _listen() {
+      async function _listen() {
         const addressInfo = server.address() as AddressInfo
         Object.assign(process.env, {
           // This is required, and it is used in Electron-Main.
@@ -134,7 +134,15 @@ export default defineNuxtModule<ElectronOptions>({
           })
           build(config)
         }
-      }())
+      }
+
+      // Setup a 3 seconds delay to avoid error 404 or 500.
+      setTimeout(
+        () => {
+          _listen();
+        },
+        3000 
+      );
     },
     // For build
     async 'build:done'() {
@@ -169,10 +177,8 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
     nuxt.options.ssr = false // true
 
     // Fix path to make it works with Electron protocol `file://`
-    nuxt.options.app.baseURL = './' // '/'
     nuxt.options.app.buildAssetsDir = '/' // '/_nuxt/' - #16
 
-    nuxt.options.runtimeConfig.app.baseURL = './' // '/'
     nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
     nuxt.options.router.options.hashMode = true // Avoid 404 errors
 
