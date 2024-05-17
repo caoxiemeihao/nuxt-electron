@@ -136,12 +136,12 @@ export default defineNuxtModule<ElectronOptions>({
         }
       }
 
-      // Setup a 3 seconds delay to avoid error 404 or 500.
+      // Setup a 5 seconds delay to avoid error 404 or 500.
       setTimeout(
         () => {
           _listen();
         },
-        3000 
+        5000 
       );
     },
     // For build
@@ -179,6 +179,7 @@ function adaptElectronConfig(options: ElectronOptions, nuxt: Nuxt) {
     // Fix path to make it works with Electron protocol `file://`
     nuxt.options.app.buildAssetsDir = '/' // '/_nuxt/' - #16
 
+    nuxt.options.runtimeConfig.app.baseURL = './' // '/'
     nuxt.options.runtimeConfig.app.buildAssetsDir = '/' // '/_nuxt/'
     nuxt.options.router.options.hashMode = true // Avoid 404 errors
 
