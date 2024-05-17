@@ -6,14 +6,13 @@
   "license": "MIT",
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "nuxi dev --no-fork",
+    "dev": "nuxi dev",
     "build": "nuxi build --prerender && electron-builder"
   },
-  "dependencies": {},
   "devDependencies": {
     "electron": "^29.3.0",
     "electron-builder": "^24.13.3",
-    "nuxt": "3.6.5",
+    "nuxt": "^3.11.2",
     "nuxt-electron": "file:../",
     "vite-plugin-electron": "^0.28.4",
     "vite-plugin-electron-renderer": "^0.14.5",
