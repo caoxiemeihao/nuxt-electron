@@ -2,7 +2,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "your.app.id",
-  "asar": false,
+  "asar": true,
   "directories": {
     "output": "release/${version}"
   },
