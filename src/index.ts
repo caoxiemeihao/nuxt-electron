@@ -1,4 +1,3 @@
-import { type AddressInfo } from 'net'
 import { defineNuxtModule } from '@nuxt/kit'
 import type {
   ResolvedConfig,
@@ -101,15 +100,9 @@ export default defineNuxtModule<ElectronOptions>({
       viteServerResolve(server)
     },
     // For development
-    listen(server, listener) {
+    listen() {
       // For `viteConfig.promise` can able resolved
       (async function _listen() {
-        const addressInfo = server.address() as AddressInfo
-        Object.assign(process.env, {
-          // This is required, and it is used in Electron-Main.
-          VITE_DEV_SERVER_URL: `http://localhost:${addressInfo.port}`,
-        })
-
         // https://github.com/electron-vite/vite-plugin-electron/blob/v0.11.2/src/index.ts#L37-L59
         for (const config of options.build) {
           config.vite ??= {}
